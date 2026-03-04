@@ -8,6 +8,21 @@ A serverless deployment of [Platane/snk](https://github.com/Platane/snk).
 
 ## Getting Started
 
+### Features
+
+Request `/:username` to get the snake game SVG for the github user `:username`.
+
+Supported query parameters:
+
+| Parameter | Description                                                   | Default |
+| --------- | ------------------------------------------------------------- | ------- |
+| `theme`   | The theme of the snake game. Can be either `light` or `dark`. | `light` |
+
+Examples:
+
+- `/Cnily03`
+- `/Cnily03?theme=dark`
+
 ### Installation
 
 Run the following command to install dependencies:
