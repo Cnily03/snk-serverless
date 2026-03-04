@@ -45,6 +45,8 @@ Or to deploy to Cloudflare Workers, run:
 pnpm run deploy
 ```
 
+Please refer to [Configuration](#configuration) section before deployment.
+
 ### Configuration
 
 Get the your Personal Access Token (PAT)
@@ -80,6 +82,9 @@ GITHUB_TOKEN="github_pat_xxx"
 ```
 
 For more information about secrets, please refer to [Secrets - Cloudflare Workers docs](https://developers.cloudflare.com/workers/configuration/secrets/).
+
+> [!NOTE]
+> DO NOT forget to add secret to your deployment.
 
 Move [wrangler.sample.toml](./wrangler.sample.toml) to `wrangler.toml` and modify environment variables to match your configuration.
 
