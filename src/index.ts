@@ -12,7 +12,7 @@ const app = new Hono<EnvHono>();
 
 app.use(parseEnv, cacheMw, etag());
 
-app.get("/:username", async (c) => {
+app.get("/api/:username", async (c) => {
   // validate input
 
   const username = c.req.param("username").trim();

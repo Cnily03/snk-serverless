@@ -10,7 +10,7 @@ A serverless deployment of [Platane/snk](https://github.com/Platane/snk).
 
 ### Features
 
-Request `/:username` to get the snake game SVG for the github user `:username`.
+Request `/api/:username` to get the snake game SVG for the github user `:username`.
 
 Supported query parameters:
 
@@ -20,8 +20,8 @@ Supported query parameters:
 
 Examples:
 
-- `/Cnily03`
-- `/Cnily03?theme=dark`
+- `/api/Cnily03`
+- `/api/Cnily03?theme=dark`
 
 ### Installation
 
