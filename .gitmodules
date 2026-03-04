@@ -1,0 +1,3 @@
+[submodule "snk"]
+	path = snk
+	url = https://github.com/Platane/snk
