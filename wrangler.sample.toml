@@ -1,0 +1,20 @@
+name               = "snk"
+main               = "src/index.ts"
+compatibility_date = "2026-03-05"
+
+# For local development, use `wrangler dev` to start a local server
+[dev]
+ip             = "0.0.0.0"
+port           = 8787
+local_protocol = "http"
+
+[vars]
+WHITELIST     = "Cnily03"
+CACHE_SECONDS = 86400
+
+[env.production]
+minify = true
+
+[env.production.vars]
+WHITELIST     = "Cnily03"
+CACHE_SECONDS = 86400
