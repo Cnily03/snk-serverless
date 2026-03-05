@@ -1,6 +1,9 @@
 node_modules/
 node_modules/**/*
 
+dist/
+
+.vercel/
 .edgeone/
 .tef_dist/*
 .wrangler/
@@ -11,8 +14,3 @@ wrangler.toml
 !.env.sample
 !.env*.sample
 
-# Tencent Cloud EdgeOne
-.env
-.edgeone/*
-.tef_dist/*
-  
