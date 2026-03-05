@@ -16,6 +16,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        submodules: "recursive"
     - uses: pnpm/action-setup@v4
       with:
         version: 10
@@ -30,6 +32,6 @@ jobs:
           package-lock.json
           yarn.lock
     - name: Install dependencies
-      run: pnpm install --frozen-lockfile
+      run: pnpm install
     - name: Build
       run: pnpm run lint
