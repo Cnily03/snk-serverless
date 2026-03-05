@@ -4,7 +4,12 @@ A serverless deployment of [Platane/snk](https://github.com/Platane/snk).
 
 > Generates a snake game from a github user contributions graph and output a screen capture as animated svg.
 
+[![Deploy with EdgeOne Pages](https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg)](https://edgeone.ai/pages/new?repository-url=https://github.com/Cnily03/snk-serverless)
+
 [![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/Cnily03/snk-serverless)
+
+> [!WARNING]
+> You may met CPU Time Limit Exceeded errors on Cloudflare Workers. Only Pro accounts or above can run this project via Cloudflare Workers.
 
 ## Getting Started
 
