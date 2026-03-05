@@ -1,0 +1,10 @@
+{
+  "installCommand": "pnpm install",
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://github.com/Cnily03/snk-serverless",
+      "statusCode": 302
+    }
+  ]
+}

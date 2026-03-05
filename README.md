@@ -75,7 +75,7 @@ If you want to show your private contributions
 - No any permission is needed.
 - Click on `Generate token` and copy it.
 
-Create file `.dev.vars` at the root of the project and add the following content:
+Create file `.env` at the root of the project and add the following content:
 
 ```env
 GITHUB_TOKEN="github_pat_xxx"

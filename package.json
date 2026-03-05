@@ -4,11 +4,11 @@
   "type": "module",
   "scripts": {
     "postinstall": "biome migrate --write",
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy",
-    "tail": "wrangler tail snk",
-    "cf-typegen": "wrangler types",
-    "check": "biome check .",
+    "dev:cf": "wrangler dev",
+    "deploy:cf": "wrangler deploy",
+    "tail:cf": "wrangler tail snk",
+    "typegen:cf": "wrangler types",
+    "lint": "biome check .",
     "format": "biome check --write ."
   },
   "dependencies": {
@@ -22,6 +22,7 @@
   "devDependencies": {
     "@biomejs/biome": "^2.4.4",
     "@cloudflare/workers-types": "^4.20260220.0",
+    "edgeone": "1.2.29-beta.2",
     "typescript": "^5.8.2",
     "wrangler": "^4.6.0"
   },

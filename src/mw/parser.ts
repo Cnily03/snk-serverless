@@ -17,8 +17,9 @@ export const parseEnv = createMiddleware<EnvHono>(async (c, next) => {
   const cacheSeconds = c.env.CACHE_SECONDS ? parseInt(c.env.CACHE_SECONDS, 10) : 0;
   c.set("cacheSeconds", cacheSeconds);
 
-  // parse cache namespace  const cacheNs = c.env.CACHE_NS?.trim() || "snk:cache";
-  c.set("cacheNamespace", c.env.CACHE_NS?.trim() || "snk:cache");
+  // parse cache name
+  const cacheName = c.env.CACHE_NAME?.trim() || "snk-cache";
+  c.set("cacheName", cacheName);
 
   await next();
 });

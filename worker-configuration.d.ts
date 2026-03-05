@@ -18,7 +18,7 @@ interface Env {
   CACHE_SECONDS?: string;
   /**
    * Namespace for cache keys.
-   * @default "snk:cache"
+   * @default "snk-cache"
    */
-  CACHE_NS?: string;
+  CACHE_NAME?: string;
 }

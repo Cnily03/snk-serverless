@@ -4,13 +4,35 @@ import type { EnvHono } from "@/types";
 
 const RESERVE_QUERIES = ["theme", "_", "t"];
 
+function inferCachesObject(): CacheStorage {
+  // for who provides Cache API
+  if (globalThis.caches) return globalThis.caches;
+  // for who doesn't provide Cache API
+  // otherwise, return a dummy object that does nothing
+  return {
+    open: async () => ({
+      match: async () => undefined,
+      put: async () => {},
+      add: async () => {},
+      addAll: async () => {},
+      delete: async () => false,
+      keys: async () => [],
+      matchAll: async () => [],
+    }),
+    delete: async () => false,
+    has: async () => false,
+    keys: async () => [],
+    match: async () => undefined,
+  };
+}
+
 export const cacheMw = createMiddleware<EnvHono>(async (c, next) => {
   // reconstruct request query in order
   const url = new URL(c.req.url);
   const queries = new URLSearchParams();
-  for (const [key, value] of url.searchParams) {
+  url.searchParams.forEach((value, key) => {
     if (RESERVE_QUERIES.includes(key)) queries.append(key, value);
-  }
+  });
   queries.sort();
   url.search = queries.toString();
   const request = new Request(url.toString(), c.req);
@@ -20,14 +42,23 @@ export const cacheMw = createMiddleware<EnvHono>(async (c, next) => {
     c.req.header("Cache-Control")?.includes("no-cache") ||
     c.req.header("Pragma")?.includes("no-cache");
 
-  const cacheNs = c.get("cacheNamespace");
+  const cacheNs = c.get("cacheName");
   const cacheSec = c.get("cacheSeconds");
+  const caches = inferCachesObject();
   const cache = await caches.open(cacheNs);
 
   if (!noCache) {
     // use cache if exists
     const cached = await cache.match(request);
-    if (cached) return cached;
+    // add cache-hit
+    if (cached) {
+      const resHeaders = new Headers(cached.headers);
+      resHeaders.set("X-Cache-Hit", "true");
+      return new Response(cached.body, {
+        ...cached,
+        headers: resHeaders,
+      });
+    }
   }
 
   await next();
