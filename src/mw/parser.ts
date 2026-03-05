@@ -1,6 +1,16 @@
 import { createMiddleware } from "hono/factory";
 import type { EnvHono } from "@/types";
 
+export const loadProcessEnv = createMiddleware<EnvHono>(async (c, next) => {
+  if (globalThis.process) {
+    c.env.GITHUB_TOKEN = process.env.GITHUB_TOKEN || c.env.GITHUB_TOKEN;
+    c.env.CACHE_NAME = process.env.CACHE_NAME || c.env.CACHE_NAME;
+    c.env.CACHE_SECONDS = process.env.CACHE_SECONDS || c.env.CACHE_SECONDS;
+    c.env.WHITELIST = process.env.WHITELIST || c.env.WHITELIST;
+  }
+  await next();
+});
+
 export const parseEnv = createMiddleware<EnvHono>(async (c, next) => {
   // parse whitelist
   const w = c.env.WHITELIST ?? "";

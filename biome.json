@@ -27,6 +27,6 @@
     }
   },
   "files": {
-    "includes": ["**", "!snk", "!**/node_modules", "!**/dist"]
+    "includes": ["**", "!snk", "!**/node_modules", "!**/dist", "!.*/**/*"]
   }
 }

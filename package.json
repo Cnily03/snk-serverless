@@ -6,6 +6,7 @@
     "postinstall": "biome migrate --write",
     "dev:cf": "wrangler dev",
     "deploy:cf": "wrangler deploy",
+    "build": "bun build --outdir=dist --minify src/index.ts",
     "tail:cf": "wrangler tail snk",
     "typegen:cf": "wrangler types",
     "lint": "biome check .",
@@ -22,8 +23,10 @@
   "devDependencies": {
     "@biomejs/biome": "^2.4.4",
     "@cloudflare/workers-types": "^4.20260220.0",
+    "@types/node": "^25.3.3",
     "edgeone": "1.2.29-beta.2",
     "typescript": "^5.8.2",
+    "vercel": "^50.27.1",
     "wrangler": "^4.6.0"
   },
   "pnpm": {

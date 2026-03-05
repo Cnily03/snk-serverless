@@ -1,6 +1,6 @@
 import { Hono } from "hono";
-import { EnvHono } from "@/types";
 import apiApp from "@/api";
+import type { EnvHono } from "@/types";
 
 const app = new Hono<EnvHono>();
 

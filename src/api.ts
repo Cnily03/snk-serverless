@@ -5,12 +5,14 @@ import z, { ZodError } from "zod";
 import { cacheMw, parseEnv } from "@/mw";
 import { generateSnakeSvg } from "@/snake";
 import type { EnvHono } from "@/types";
+import { cacheHeaders } from "./mw/cache";
+import { loadProcessEnv } from "./mw/parser";
 
 const zodTheme = z.enum(["light", "dark"]);
 
 const app = new Hono<EnvHono>();
 
-app.use(parseEnv, cacheMw, etag());
+app.use(loadProcessEnv, parseEnv, cacheMw, etag());
 
 app.get("/:username", async (c) => {
   // validate input
@@ -34,8 +36,7 @@ app.get("/:username", async (c) => {
   return c.newResponse(svg, {
     headers: {
       "Content-Type": "image/svg+xml",
-      "Cache-Control": `public, max-age=${c.get("cacheSeconds")}`,
-      Expires: new Date(Date.now() + c.get("cacheSeconds") * 1000).toUTCString(),
+      ...cacheHeaders(c),
     },
   });
 });

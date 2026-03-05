@@ -78,7 +78,7 @@ export function cacheHeaders(c: Context<EnvHono>, seconds?: number): HeadersInit
   if (Number.isNaN(seconds) || seconds <= 0) return {};
   const now = new Date();
   return {
-    "Cache-Control": `public, max-age=${seconds}`,
+    "Cache-Control": `public, max-age=${seconds}, s-maxage=${seconds}`,
     Expires: new Date(now.getTime() + seconds * 1000).toUTCString(),
     "Last-Modified": now.toUTCString(),
   };
