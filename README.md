@@ -9,7 +9,7 @@ A serverless deployment of [Platane/snk](https://github.com/Platane/snk).
 [![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/Cnily03/snk-serverless)
 
 > [!WARNING]
-> You may met CPU Time Limit Exceeded errors on Cloudflare Workers. Only Pro accounts or above can run this project via Cloudflare Workers.
+> You may meet CPU Time Limit Exceeded errors on Cloudflare Workers. Only Pro accounts or above can run this project via Cloudflare Workers.
 
 ## Getting Started
 
