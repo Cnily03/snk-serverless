@@ -19,6 +19,8 @@ Examples:
 - `/snk/Cnily03`
 - `/snk/Cnily03?theme=dark`
 
+The serverless application would regenerate the SVG according to scheduled tasks you set in configurations.
+
 ## Install and Deploy
 
 Clone the repository with submodules:
@@ -56,7 +58,7 @@ Set the environment variables for the Cloudflare Workers project:
 
 | Variable | Description |
 | -------- | ----------- |
-| `GITHUB_TOKEN` | GitHub PAT. See [Configuration](#configuration). **Please set it as a secret.** |
+| `GITHUB_TOKEN` | GitHub PAT. See [Github Token](#github-token). **Please set it as a secret.** |
 | `WHITELIST` | Comma-separated allowed usernames. Leave empty to allow all users. |
 | `CACHE_NAME` | *(optional)* The name of the Cloudflare cache to use. See [Cache - Cloudflare API](https://developers.cloudflare.com/api/resources/cache/). |
 | `CACHE_SECONDS` | *(optional)* The number of seconds to cache the response. |
@@ -75,20 +77,19 @@ pnpm deploy:cf
 
 ### Deploy to Vercel
 
-Create an Upstash Redis database on [upstassh.com](https://console.upstash.com) (or install the [Upstash integration](https://vercel.com/marketplace/upstash) from the [Vercel Marketplace](https://vercel.com/marketplace)) and copy its REST credentials.
+[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FCnily03%2Fsnk-serverless&env=GITHUB_TOKEN,CRON_SECRET&project-name=snk-serverless&repository-name=snk-serverless)
+
+Create an Upstash Redis database on [upstash.com](https://console.upstash.com) (or install the [Upstash integration](https://vercel.com/marketplace/upstash) from the [Vercel Marketplace](https://vercel.com/marketplace)) and copy its REST credentials.
 
 Set the environment variables for the Vercel project:
 
 | Variable | Description |
 | -------- | ----------- |
-| `GITHUB_TOKEN` | GitHub PAT. See [Configuration](#configuration). **Please set it as a secret.** |
+| `GITHUB_TOKEN` | GitHub PAT. See [Github Token](#github-token). **Please set it as a secret.** |
 | `WHITELIST` | Comma-separated allowed usernames. Leave empty to allow all users. |
 | `UPSTASH_REDIS_REST_URL` or `KV_REST_API_URL` | Upstash Redis REST URL. |
 | `UPSTASH_REDIS_REST_TOKEN` or `KV_REST_API_TOKEN` | Upstash Redis REST token. |
 | `CRON_SECRET` | Required by scheduled tasks. |
-
-> [!WARNING]
-> Vercel's Git integration does not check out git submodules, but the `@snk/*` packages live in the `snk` submodule. Please deploy with the Vercel CLI manually from a machine where the submodules are checked out.
 
 To deploy to Vercel, run:
 
@@ -96,9 +97,9 @@ To deploy to Vercel, run:
 pnpm run deploy:vercel
 ```
 
-## Configuration
+## Github Token
 
-Get the your Personal Access Token (PAT)
+Get your Personal Access Token (PAT)
 
 ### Classic token
 
@@ -123,21 +124,6 @@ If you want to show your private contributions
 - Select All repositories.
 - No any permission is needed.
 - Click on `Generate token` and copy it.
-
-Create file `.env` at the root of the project and add the following content:
-
-```env
-GITHUB_TOKEN="github_pat_xxx"
-```
-
-For more information about secrets, please refer to [Secrets - Cloudflare Workers docs](https://developers.cloudflare.com/workers/configuration/secrets/).
-
-> [!NOTE]
-> DO NOT forget to add GITHUB_TOKEN secret to your deployment.
-
-Move [wrangler.sample.toml](./wrangler.sample.toml) to `wrangler.toml` and modify environment variables to match your configuration.
-
-All available environment variables are listed in [worker-configuration.d.ts](./worker-configuration.d.ts).
 
 ## License
 
