@@ -1,8 +1,23 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "pnpm install",
-  "framework": "bun",
   "bunVersion": "1.x",
+  "services": {
+    "snake": {
+      "root": ".",
+      "framework": "bun",
+      "entrypoint": "src/vercel.ts",
+      "devCommand": "bun --hot src/vercel.ts",
+      "installCommand": "pnpm install"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": {
+        "service": "snake"
+      }
+    }
+  ],
   "schedules": {
     "update": {
       "schedule": "0 2,10,18 * * *",
