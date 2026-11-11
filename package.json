@@ -4,11 +4,11 @@
   "type": "module",
   "scripts": {
     "postinstall": "biome migrate --write",
-    "dev:cf": "wrangler dev",
-    "deploy:cf": "wrangler deploy",
+    "dev": "wrangler -c wrangler.local.toml  dev",
+    "deploy": "wrangler -c wrangler.local.toml deploy",
     "build": "bun build --outdir=dist --minify src/index.ts",
-    "tail:cf": "wrangler tail snk",
-    "typegen:cf": "wrangler types",
+    "tail": "wrangler -c wrangler.local.toml tail snk",
+    "typegen": "wrangler types",
     "lint": "biome check .",
     "format": "biome check --write ."
   },
@@ -28,13 +28,5 @@
     "typescript": "^5.8.2",
     "vercel": "^50.27.1",
     "wrangler": "^4.6.0"
-  },
-  "pnpm": {
-    "overrides": {
-      "@snk/github-user-contribution": "file:./snk/packages/github-user-contribution",
-      "@snk/solver": "file:./snk/packages/solver",
-      "@snk/svg-creator": "file:./snk/packages/svg-creator",
-      "@snk/types": "file:./snk/packages/types"
-    }
   }
 }

@@ -53,11 +53,15 @@ const getDrawOptions = (theme: Theme): DrawOptions => {
   };
 };
 
-export async function generateSnakeSvg(username: string, theme: Theme, githubToken: string) {
+export async function getSnakeCells(username: string, githubToken: string) {
   const cells = await getGithubUserContribution(username, {
     githubToken,
   });
 
+  return cells;
+}
+
+export async function renderSnakeSvg(cells: Cell[], theme: Theme) {
   const grid = userContributionToGrid(cells);
   const chain = getBestRoute(grid, snake4) ?? [snake4];
   chain.push(...(getPathToPose(chain[chain.length - 1], snake4) ?? []));
@@ -65,4 +69,16 @@ export async function generateSnakeSvg(username: string, theme: Theme, githubTok
   return createSvg(grid, cells, chain, getDrawOptions(theme), {
     stepDurationMs: 100,
   });
+}
+
+const cellsMap = new Map<string, Cell[]>();
+
+export async function generateSnakeSvg(username: string, theme: Theme, githubToken: string) {
+  let cells = cellsMap.get(username);
+  if (!cells) {
+    cells = await getSnakeCells(username, githubToken);
+    cellsMap.set(username, cells);
+  }
+
+  return renderSnakeSvg(cells, theme);
 }

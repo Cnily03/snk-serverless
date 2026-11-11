@@ -1,0 +1,19 @@
+# pnpm >= 10 reads settings (like overrides) from this file instead of package.json "pnpm" field.
+# These packages live in the snk git submodule and are not published to npm,
+# so every @snk/* reference (including transitive ones) is forced to the local directory.
+overrides:
+  "@snk/github-user-contribution": file:./snk/packages/github-user-contribution
+  "@snk/solver": file:./snk/packages/solver
+  "@snk/svg-creator": file:./snk/packages/svg-creator
+  "@snk/types": file:./snk/packages/types
+
+# pnpm >= 11 blocks dependency install scripts unless explicitly allowed (allowBuilds,
+# which replaced onlyBuiltDependencies). workerd / esbuild need their postinstall
+# to set up the binaries used by wrangler.
+# sharp comes via miniflare (wrangler). Its prebuilt platform binaries arrive through
+# optionalDependencies (@img/sharp-*) and work without any install script; the check.js
+# postinstall just fails spuriously under pnpm's layout, so the script is denied.
+allowBuilds:
+  esbuild: true
+  sharp: false
+  workerd: true

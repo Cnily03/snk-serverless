@@ -4,8 +4,6 @@ A serverless deployment of [Platane/snk](https://github.com/Platane/snk).
 
 > Generates a snake game from a github user contributions graph and output a screen capture as animated svg.
 
-[![Deploy with EdgeOne Pages](https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg)](https://edgeone.ai/pages/new?repository-url=https://github.com/Cnily03/snk-serverless)
-
 [![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/Cnily03/snk-serverless)
 
 > [!WARNING]
@@ -15,7 +13,7 @@ A serverless deployment of [Platane/snk](https://github.com/Platane/snk).
 
 ### Features
 
-Request `/api/:username` to get the snake game SVG for the github user `:username`.
+Request `/snk/:username` to get the snake game SVG for the github user `:username`.
 
 Supported query parameters:
 
@@ -25,8 +23,8 @@ Supported query parameters:
 
 Examples:
 
-- `/api/Cnily03`
-- `/api/Cnily03?theme=dark`
+- `/snk/Cnily03`
+- `/snk/Cnily03?theme=dark`
 
 ### Installation
 
@@ -36,7 +34,7 @@ Run the following command to install dependencies:
 pnpm install
 ```
 
-Other package managers can be used as well.
+Copy [wrangler.toml](./wrangler.toml) to `wrangler.local.toml` and modify the configuration to match your environment.
 
 To start a development server, run:
 
@@ -47,7 +45,7 @@ pnpm dev
 Or to deploy to Cloudflare Workers, run:
 
 ```bash
-pnpm run deploy
+pnpm deploy
 ```
 
 Please refer to [Configuration](#configuration) section before deployment.

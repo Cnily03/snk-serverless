@@ -27,6 +27,19 @@ function inferCachesObject(): CacheStorage {
 }
 
 export const cacheMw = createMiddleware<EnvHono>(async (c, next) => {
+  const cacheName = c.get("cacheName");
+  const cacheSec = c.get("cacheSeconds");
+
+  if (
+    typeof cacheName !== "string" ||
+    cacheName.trim() === "" ||
+    typeof cacheSec !== "number" ||
+    cacheSec <= 0
+  ) {
+    await next();
+    return;
+  }
+
   // reconstruct request query in order
   const url = new URL(c.req.url);
   const queries = new URLSearchParams();
@@ -42,10 +55,8 @@ export const cacheMw = createMiddleware<EnvHono>(async (c, next) => {
     c.req.header("Cache-Control")?.includes("no-cache") ||
     c.req.header("Pragma")?.includes("no-cache");
 
-  const cacheNs = c.get("cacheName");
-  const cacheSec = c.get("cacheSeconds");
   const caches = inferCachesObject();
-  const cache = await caches.open(cacheNs);
+  const cache = await caches.open(cacheName);
 
   if (!noCache) {
     // use cache if exists
@@ -75,7 +86,7 @@ export const cacheMw = createMiddleware<EnvHono>(async (c, next) => {
 
 export function cacheHeaders(c: Context<EnvHono>, seconds?: number): HeadersInit {
   seconds = seconds ?? c.get("cacheSeconds");
-  if (Number.isNaN(seconds) || seconds <= 0) return {};
+  if (!seconds || Number.isNaN(seconds) || seconds <= 0) return {};
   const now = new Date();
   return {
     "Cache-Control": `public, max-age=${seconds}, s-maxage=${seconds}`,

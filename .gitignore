@@ -1,5 +1,4 @@
 node_modules/
-node_modules/**/*
 
 dist/
 
@@ -7,10 +6,10 @@ dist/
 .edgeone/
 .tef_dist/*
 .wrangler/
-wrangler.toml
+wrangler.local.toml
 
 .dev.vars*
 .env*
-!.env.sample
-!.env*.sample
+!.env.example
+!.env.*.example
 

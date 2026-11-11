@@ -1,0 +1,27 @@
+name               = "snk"
+main               = "src/index.ts"
+compatibility_date = "2026-03-05"
+
+# For local development, use `wrangler dev` to start a local server
+[dev]
+ip             = "127.0.0.1"
+port           = 8787
+local_protocol = "http"
+
+[[kv_namespaces]]
+binding = "KV"
+# Replace the id returned by `wrangler kv namespace create KV_NAMESPACE`,
+# where KV_NAMESPACE is the name of your KV namespace.
+id      = "REPLACE_WITH_KV_NAMESPACE_ID"
+
+[vars]
+WHITELIST     = "Cnily03"
+# Please set GITHUB_TOKEN as a secret instead of a variable.
+
+# If you don't want to use caching, you can comment out the following lines,
+# or set CACHE_NAME to an empty string, or set CACHE_SECONDS to 0.
+CACHE_NAME    = "snake-cache"
+CACHE_SECONDS = "3600"
+
+[triggers]
+crons = ["0 2,10,18 * * *"]
