@@ -1,0 +1,12 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "pnpm install",
+  "framework": "bun",
+  "bunVersion": "1.x",
+  "schedules": {
+    "update": {
+      "schedule": "0 2,10,18 * * *",
+      "path": "/api/schedule/update"
+    }
+  }
+}

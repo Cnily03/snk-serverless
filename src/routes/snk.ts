@@ -3,16 +3,16 @@ import { etag } from "hono/etag";
 import { createMiddleware } from "hono/factory";
 import { HTTPException } from "hono/http-exception";
 import z, { ZodError } from "zod";
-import { cacheMw, parseEnv } from "@/mw";
+import { cacheMw } from "@/mw";
+import { cacheHeaders } from "@/mw/cache";
 import { generateSnakeSvg } from "@/snake";
 import type { EnvHono, Theme } from "@/types";
-import { cacheHeaders } from "../mw/cache";
 
 const zodTheme = z.enum(["light", "dark"]);
 
 const app = new Hono<EnvHono>();
 
-app.use(parseEnv, cacheMw, etag());
+app.use(cacheMw, etag());
 
 const checkUsername = createMiddleware<EnvHono>(async (c, next) => {
   const username = c.req.param("username")?.trim();

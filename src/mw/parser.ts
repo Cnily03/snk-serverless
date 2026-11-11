@@ -1,4 +1,5 @@
 import { createMiddleware } from "hono/factory";
+import { kv } from "@/kv";
 import type { EnvHono } from "@/types";
 
 export function parseWhitelist(whitelist: string | undefined): Set<string> {
@@ -11,6 +12,9 @@ export function parseWhitelist(whitelist: string | undefined): Set<string> {
 }
 
 export const parseEnv = createMiddleware<EnvHono>(async (c, next) => {
+  // set env according to Redis or KV binding
+  c.env.KV = kv(c.env.KV, c.env);
+
   // parse whitelist
   c.set("whitelist", parseWhitelist(c.env.WHITELIST));
 
@@ -20,7 +24,6 @@ export const parseEnv = createMiddleware<EnvHono>(async (c, next) => {
     "cacheSeconds",
     typeof cacheSeconds === "number" && cacheSeconds <= 0 ? undefined : cacheSeconds,
   );
-
   const cacheName = c.env.CACHE_NAME;
   c.set("cacheName", cacheName);
 

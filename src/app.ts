@@ -1,8 +1,11 @@
 import { Hono } from "hono";
+import { parseEnv } from "@/mw/parser";
 import snkImgApp from "@/routes/snk";
 import type { EnvHono } from "@/types";
 
 const app = new Hono<EnvHono>();
+
+app.use(parseEnv);
 
 app.get("/", (c) => c.redirect("https://github.com/Cnily03/snk-serverless", 302));
 
