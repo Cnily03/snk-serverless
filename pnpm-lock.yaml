@@ -7,7 +7,7 @@ importers:
     configDependencies: {}
     packageManagerDependencies:
       pnpm:
-        specifier: 12.17.0
+        specifier: '>=12.0.0'
         version: 12.17.0
 
 packages:
@@ -209,6 +209,9 @@ importers:
       '@types/node':
         specifier: ^25.3.3
         version: 25.3.3
+      node:
+        specifier: runtime:>=24.0.0
+        version: runtime:27.0.0-alpha.0.0.0
       typescript:
         specifier: ^5.8.2
         version: 5.9.3
@@ -1977,6 +1980,106 @@ packages:
 
   node-gyp-build@4.8.4:
     resolution: {integrity: sha512-LA4ZjwlnUblHVgq0oBF3Jl/6h/Nvs5fzBLwdEF4nuxnFdsfajde4WfxtJr3CaiH+F6ewcIB/q4jQ4UzPyid+CQ==}
+    hasBin: true
+
+  node@runtime:27.0.0-alpha.0.0.0:
+    resolution:
+      type: variations
+      variants:
+        - resolution:
+            archive: tarball
+            bin:
+              node: bin/node
+            integrity: sha256-yEAQAe/GNKYPaNNFMKvVu/wuwV9DguaXm97Q67xsNl4=
+            type: binary
+            url: https://nodejs.org/download/release/v27.0.0-alpha.0.0.0/node-v27.0.0-alpha.0.0.0-aix-ppc64.tar.gz
+          targets:
+            - cpu: ppc64
+              os: aix
+        - resolution:
+            archive: tarball
+            bin:
+              node: bin/node
+            integrity: sha256-zhZ9ZrxdHdJe/PsBJkJeKhwrJnquoqXQu0eJKyr6y8Q=
+            type: binary
+            url: https://nodejs.org/download/release/v27.0.0-alpha.0.0.0/node-v27.0.0-alpha.0.0.0-darwin-arm64.tar.gz
+          targets:
+            - cpu: arm64
+              os: darwin
+        - resolution:
+            archive: tarball
+            bin:
+              node: bin/node
+            integrity: sha256-6HUCQTwOnmlaV+9L+K1Sf+9vYNO3dQ3njegYE2nkOqQ=
+            type: binary
+            url: https://nodejs.org/download/release/v27.0.0-alpha.0.0.0/node-v27.0.0-alpha.0.0.0-linux-arm64.tar.gz
+          targets:
+            - cpu: arm64
+              os: linux
+        - resolution:
+            archive: tarball
+            bin:
+              node: bin/node
+            integrity: sha256-RXWOkw8IzvHowcxfRprgxZcSfqDnLWKyBVfngN+J7jg=
+            type: binary
+            url: https://nodejs.org/download/release/v27.0.0-alpha.0.0.0/node-v27.0.0-alpha.0.0.0-linux-ppc64le.tar.gz
+          targets:
+            - cpu: ppc64le
+              os: linux
+        - resolution:
+            archive: tarball
+            bin:
+              node: bin/node
+            integrity: sha256-5dvm3lGC1jezXSCPHcInAOdNhRoGql1pt8Rj02POce4=
+            type: binary
+            url: https://nodejs.org/download/release/v27.0.0-alpha.0.0.0/node-v27.0.0-alpha.0.0.0-linux-s390x.tar.gz
+          targets:
+            - cpu: s390x
+              os: linux
+        - resolution:
+            archive: tarball
+            bin:
+              node: bin/node
+            integrity: sha256-NZ87fkua9f75WkNrV7XueZ967VFk1dN1jjUetkRa9D0=
+            type: binary
+            url: https://nodejs.org/download/release/v27.0.0-alpha.0.0.0/node-v27.0.0-alpha.0.0.0-linux-x64-musl.tar.gz
+          targets:
+            - cpu: x64
+              os: linux
+              libc: musl
+        - resolution:
+            archive: tarball
+            bin:
+              node: bin/node
+            integrity: sha256-5cUYLzIFuza4h2Q+LfyqVF4e6LzsBebD9xn+M42nDh8=
+            type: binary
+            url: https://nodejs.org/download/release/v27.0.0-alpha.0.0.0/node-v27.0.0-alpha.0.0.0-linux-x64.tar.gz
+          targets:
+            - cpu: x64
+              os: linux
+        - resolution:
+            archive: zip
+            bin:
+              node: node.exe
+            integrity: sha256-DgDCMDMTIoB78gX8V6hnvqaa9KbzGqWStik2CZXJhVo=
+            prefix: node-v27.0.0-alpha.0.0.0-win-arm64
+            type: binary
+            url: https://nodejs.org/download/release/v27.0.0-alpha.0.0.0/node-v27.0.0-alpha.0.0.0-win-arm64.zip
+          targets:
+            - cpu: arm64
+              os: win32
+        - resolution:
+            archive: zip
+            bin:
+              node: node.exe
+            integrity: sha256-PIQDgmXpWz0ocWq3oOa4R47tjjBOycy7IrjbAxyCHdE=
+            prefix: node-v27.0.0-alpha.0.0.0-win-x64
+            type: binary
+            url: https://nodejs.org/download/release/v27.0.0-alpha.0.0.0/node-v27.0.0-alpha.0.0.0-win-x64.zip
+          targets:
+            - cpu: x64
+              os: win32
+    version: 27.0.0-alpha.0.0.0
     hasBin: true
 
   nopt@8.1.0:
@@ -3939,6 +4042,8 @@ snapshots:
       whatwg-url: 5.0.0
 
   node-gyp-build@4.8.4: {}
+
+  node@runtime:27.0.0-alpha.0.0.0: {}
 
   nopt@8.1.0:
     dependencies:
